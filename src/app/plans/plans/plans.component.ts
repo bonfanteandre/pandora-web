@@ -31,10 +31,18 @@ export class PlansComponent implements OnInit {
     }
 
     public editPlan(plan: Plan): void {
-        console.log(plan);
+        this.router.navigateByUrl(`/plans/${plan.id}/details`);
     }
 
     public removePlan(plan: Plan): void {
-        console.log(plan);
+        const remove = confirm('Tem certeza que deseja remover este plano?');
+        if (remove) {
+            this.plansService
+                .remove(plan)
+                .subscribe(() => {
+                    alert('Plano removido com sucesso!');
+                    this.loadPlans();
+                });
+        }
     }
 }
