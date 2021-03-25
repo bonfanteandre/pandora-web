@@ -17,7 +17,7 @@
                 <label><strong>Preço *</strong></label>
                 <input type="number" formControlName="price" class="form-control" placeholder="Preço">
                 <small *ngIf="form.get('price').errors?.required && (form.get('price').dirty || form.get('price').touched)" class="ng-invalid">
-                    O campo nome é obrigatório.
+                    O campo preço é obrigatório.
                 </small>
             </div>
             <button type="submit" class="btn btn-success" [disabled]="!form.valid">
