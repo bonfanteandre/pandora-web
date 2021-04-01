@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-12 mt-2">
+        <h1>Formas de pagamento</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mt-2">
+        <button type="button" class="btn btn-primary" (click)="createPaymentMethod()">
+            <i class="fa fa-plus"></i>
+            Nova forma de pagamento
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mt-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th class="text-center" style="width: 30%">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let paymentMethod of paymentMethods">
+                    <td>{{ paymentMethod.name }}</td>
+                    <td class="text-center" style="width: 30%">
+                        <button type="button" class="btn btn-success mr-2" (click)="editPaymentMethod(paymentMethod)">
+                            <i class="fa fa-edit"></i>
+                            Editar
+                        </button>
+                        <button type="button" class="btn btn-danger" (click)="removePaymentMethod(paymentMethod)">
+                            <i class="fa fa-trash"></i>
+                            Remover
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

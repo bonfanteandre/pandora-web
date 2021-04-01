@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'plans',
     loadChildren: './plans/plans.module#PlansModule'
   },
+  {
+    path: 'payment-methods',
+    loadChildren: './payment-methods/payment-methods.module#PaymentMethodsModule'
+  }
 ];
 
 @NgModule({

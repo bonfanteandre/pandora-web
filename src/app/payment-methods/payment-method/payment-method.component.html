@@ -1,0 +1,22 @@
+<div class="row mt-2">
+    <div class="col-12">
+        <h1>Cadastro de forma de pagamento</h1>
+    </div>
+</div>
+<div class="row mt-2" *ngIf="paymentMethod">
+    <div class="col-12">
+        <form [formGroup]="form" (ngSubmit)="savePaymentMethod()">
+            <div class="form-group">
+                <label><strong>Nome *</strong></label>
+                <input type="text" formControlName="name" class="form-control" placeholder="Nome">
+                <small *ngIf="form.get('name').errors?.required && (form.get('name').dirty || form.get('name').touched)" class="ng-invalid">
+                    O campo nome é obrigatório.
+                </small>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+                <i class="fa fa-check"></i>
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>

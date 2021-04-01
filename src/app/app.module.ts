@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { PaymentMethodsModule } from './payment-methods/payment-methods.module';
 import { PlansModule } from './plans/plans.module';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { PlansModule } from './plans/plans.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    PlansModule
+    PlansModule,
+    PaymentMethodsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
