@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { OperationResult } from "src/app/core/models/common/operation-result";
 import { PaymentMethod } from "src/app/core/models/payment-method";
 import { PaymentMethodsService } from "src/app/core/services/payment-methods.service";
 import { SwalService } from "src/app/shared/services/swal.service";
@@ -13,7 +14,7 @@ export class PaymentMethodComponent {
 
     public paymentMethod: PaymentMethod;
     public isNew: boolean = true;
-
+    public operationResult: OperationResult;
     public form: FormGroup;
 
     constructor(
@@ -64,18 +65,22 @@ export class PaymentMethodComponent {
     }
 
     private createPaymentMethod(): void {
-        this.paymentMethodsService.create(this.paymentMethod)
-            .subscribe(() => {
+        this.operationResult = null;
+        this.paymentMethodsService.create(this.paymentMethod).subscribe(
+            () => {
                 this.swalService.showToast('Forma de pagamento criada com sucesso!', 'success');
                 this.router.navigateByUrl('/payment-methods');
-            });
+            },
+            (result: OperationResult) => this.operationResult = result);
     }
 
     private updatePaymentMethod(): void {
-        this.paymentMethodsService.update(this.paymentMethod)
-            .subscribe(() => {
+        this.operationResult = null;
+        this.paymentMethodsService.update(this.paymentMethod).subscribe(
+            () => {
                 this.swalService.showToast('Forma de pagamento atualizada com sucesso!', 'success');
                 this.router.navigateByUrl('/payment-methods');
-            });
+            },
+            (result: OperationResult) => this.operationResult = result);
     }
 }

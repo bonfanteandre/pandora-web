@@ -2,17 +2,20 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
+import { ErrorsComponent } from "./errors/errors.component";
 import { HeaderItemComponent } from "./header/header-item/header-item.component";
 import { HeaderComponent } from "./header/header.component";
 
 @NgModule({
     declarations: [
         HeaderComponent,
-        HeaderItemComponent
+        HeaderItemComponent,
+        ErrorsComponent
     ],
     exports: [
         HeaderComponent,
-        HeaderItemComponent
+        HeaderItemComponent,
+        ErrorsComponent
     ],
     imports: [
         CommonModule,

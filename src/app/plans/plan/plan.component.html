@@ -3,6 +3,12 @@
         <h1>Cadastro de plano</h1>
     </div>
 </div>
+<div class="row mt-2" *ngIf="operationResult && !operationResult.success">
+    <div class="col-12">
+        <pndr-errors [errors]="operationResult.errors"  [title]="'Erro ao salvar plano!'">
+        </pndr-errors>
+    </div>
+</div>
 <div class="row mt-2" *ngIf="plan">
     <div class="col-12">
         <form [formGroup]="form" (ngSubmit)="savePlan()">

@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { EndpointsService } from "src/app/shared/services/endpoints.service";
 import { PaymentMethod } from "../models/payment-method";
 
@@ -21,18 +22,25 @@ export class PaymentMethodsService {
         return this.http.get<PaymentMethod>(url);
     }
 
-    public create(plan: PaymentMethod): Observable<void> {
+    public create(paymentMethod: PaymentMethod): Observable<void> {
         const url = `${this.endpointsService.apiUrl}/payment-methods`;
-        return this.http.post<void>(url, plan);
+        return this.http.post<void>(url, paymentMethod)
+            .pipe(catchError(this.handleError));
     }
 
-    public update(plan: PaymentMethod): Observable<void> {
-        const url = `${this.endpointsService.apiUrl}/payment-methods/${plan.id}`;
-        return this.http.put<void>(url, plan);
+    public update(paymentMethod: PaymentMethod): Observable<void> {
+        const url = `${this.endpointsService.apiUrl}/payment-methods/${paymentMethod.id}`;
+        return this.http.put<void>(url, paymentMethod)
+            .pipe(catchError(this.handleError));;
     }
 
-    public remove(plan: PaymentMethod): Observable<void> {
-        const url = `${this.endpointsService.apiUrl}/payment-methods/${plan.id}`;
-        return this.http.delete<void>(url);
+    public remove(paymentMethod: PaymentMethod): Observable<void> {
+        const url = `${this.endpointsService.apiUrl}/payment-methods/${paymentMethod.id}`;
+        return this.http.delete<void>(url)
+            .pipe(catchError(this.handleError));
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        return throwError(error.error);
     }
 }

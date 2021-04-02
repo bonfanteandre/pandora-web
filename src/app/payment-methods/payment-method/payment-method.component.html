@@ -3,6 +3,12 @@
         <h1>Cadastro de forma de pagamento</h1>
     </div>
 </div>
+<div class="row mt-2" *ngIf="operationResult && !operationResult.success">
+    <div class="col-12">
+        <pndr-errors [errors]="operationResult.errors" [title]="'Erro ao salvar forma de pagamento!'">
+        </pndr-errors>
+    </div>
+</div>
 <div class="row mt-2" *ngIf="paymentMethod">
     <div class="col-12">
         <form [formGroup]="form" (ngSubmit)="savePaymentMethod()">

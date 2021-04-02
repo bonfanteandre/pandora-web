@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { OperationResult } from "src/app/core/models/common/operation-result";
 import { Plan } from "src/app/core/models/plan";
 import { PlansService } from "src/app/core/services/plans.service";
 import { SwalService } from "src/app/shared/services/swal.service";
@@ -13,7 +14,7 @@ export class PlanComponent implements OnInit {
 
     public plan: Plan;
     public isNew: boolean = true;
-
+    public operationResult: OperationResult;
     public form: FormGroup;
 
     constructor(
@@ -66,18 +67,23 @@ export class PlanComponent implements OnInit {
     }
 
     private createPlan(): void {
-        this.plansService.create(this.plan)
-            .subscribe(() => {
+        this.operationResult = null;
+        this.plansService.create(this.plan).subscribe(
+            () => {
                 this.swalService.showToast('Plano criado com sucesso!', 'success');
                 this.router.navigateByUrl('/plans');
-            });
+            },
+            (result: OperationResult) => this.operationResult = result);
     }
+    
 
     private updatePlan(): void {
-        this.plansService.update(this.plan)
-            .subscribe(() => {
+        this.operationResult = null;
+        this.plansService.update(this.plan).subscribe(
+            () => {
                 this.swalService.showToast('Plano atualizado com sucesso!', 'success');
                 this.router.navigateByUrl('/plans');
-            });
+            },
+            (result: OperationResult) => this.operationResult = result);
     }
 }

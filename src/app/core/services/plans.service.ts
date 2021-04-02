@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EndpointsService } from "src/app/shared/services/endpoints.service";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { Plan } from "../models/plan";
+import { OperationResult } from "../models/common/operation-result";
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -21,18 +23,25 @@ export class PlansService {
         return this.http.get<Plan>(url);
     }
 
-    public create(plan: Plan): Observable<void> {
+    public create(plan: Plan): Observable<OperationResult> {
         const url = `${this.endpointsService.apiUrl}/plans`;
-        return this.http.post<void>(url, plan);
+        return this.http.post<OperationResult>(url, plan)
+            .pipe(catchError(this.handleError));
     }
 
-    public update(plan: Plan): Observable<void> {
+    public update(plan: Plan): Observable<OperationResult> {
         const url = `${this.endpointsService.apiUrl}/plans/${plan.id}`;
-        return this.http.put<void>(url, plan);
+        return this.http.put<OperationResult>(url, plan)
+            .pipe(catchError(this.handleError));
     }
 
-    public remove(plan: Plan): Observable<void> {
+    public remove(plan: Plan): Observable<OperationResult> {
         const url = `${this.endpointsService.apiUrl}/plans/${plan.id}`;
-        return this.http.delete<void>(url);
+        return this.http.delete<OperationResult>(url)
+            .pipe(catchError(this.handleError));
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        return throwError(error.error);
     }
 }
