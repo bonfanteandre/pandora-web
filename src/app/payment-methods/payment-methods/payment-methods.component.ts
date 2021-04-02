@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { PaymentMethod } from "src/app/core/models/payment-method";
 import { PaymentMethodsService } from "src/app/core/services/payment-methods.service";
+import { SwalService } from "src/app/shared/services/swal.service";
 
 @Component({
     selector: 'pndr-payment-methods',
@@ -14,7 +15,10 @@ export class PaymentMethodsComponent {
     public take: number = 10;
     public name: string = '';
 
-    constructor(private router: Router, private paymentMethodsService: PaymentMethodsService) { }
+    constructor(
+        private router: Router, 
+        private paymentMethodsService: PaymentMethodsService,
+        private swalService: SwalService) { }
 
     ngOnInit(): void {
         this.loadPaymentMethods();
@@ -35,15 +39,15 @@ export class PaymentMethodsComponent {
     }
 
     public removePaymentMethod(paymentMethod: PaymentMethod): void {
-        const remove = confirm('Tem certeza que deseja remover esta forma de pagamento?');
-        if (remove) {
+        this.swalService.showConfirm('Tem certeza que deseja remover esta forma de pagamento?', '',
+        () => {
             this.paymentMethodsService
                 .remove(paymentMethod)
                 .subscribe(() => {
-                    alert('Forma de pagamento removido com sucesso!');
+                    this.swalService.showToast('Forma de pagamento removido com sucesso!', 'success');
                     this.loadPaymentMethods();
                 });
-        }
+        },
+        () => {});
     }
-
 }

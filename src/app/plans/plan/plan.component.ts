@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Plan } from "src/app/core/models/plan";
 import { PlansService } from "src/app/core/services/plans.service";
+import { SwalService } from "src/app/shared/services/swal.service";
 
 @Component({
     selector: 'pndr-plan',
@@ -19,7 +20,8 @@ export class PlanComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder, 
-        private plansService: PlansService) { }
+        private plansService: PlansService,
+        private swalService: SwalService) { }
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
@@ -66,7 +68,7 @@ export class PlanComponent implements OnInit {
     private createPlan(): void {
         this.plansService.create(this.plan)
             .subscribe(() => {
-                alert('Plano criado com sucesso!');
+                this.swalService.showToast('Plano criado com sucesso!', 'success');
                 this.router.navigateByUrl('/plans');
             });
     }
@@ -74,7 +76,7 @@ export class PlanComponent implements OnInit {
     private updatePlan(): void {
         this.plansService.update(this.plan)
             .subscribe(() => {
-                alert('Plano atualizado com sucesso!');
+                this.swalService.showToast('Plano atualizado com sucesso!', 'success');
                 this.router.navigateByUrl('/plans');
             });
     }

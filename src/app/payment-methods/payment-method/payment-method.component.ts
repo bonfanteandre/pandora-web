@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PaymentMethod } from "src/app/core/models/payment-method";
 import { PaymentMethodsService } from "src/app/core/services/payment-methods.service";
+import { SwalService } from "src/app/shared/services/swal.service";
 
 @Component({
     selector: 'pndr-payment-method',
@@ -19,7 +20,8 @@ export class PaymentMethodComponent {
         private router: Router,
         private route: ActivatedRoute,
         private formBuilder: FormBuilder, 
-        private paymentMethodsService: PaymentMethodsService) { }
+        private paymentMethodsService: PaymentMethodsService,
+        private swalService: SwalService) { }
 
     ngOnInit(): void {
         this.route.params.subscribe(params => {
@@ -64,7 +66,7 @@ export class PaymentMethodComponent {
     private createPaymentMethod(): void {
         this.paymentMethodsService.create(this.paymentMethod)
             .subscribe(() => {
-                alert('Forma de pagamento criada com sucesso!');
+                this.swalService.showToast('Forma de pagamento criada com sucesso!', 'success');
                 this.router.navigateByUrl('/payment-methods');
             });
     }
@@ -72,7 +74,7 @@ export class PaymentMethodComponent {
     private updatePaymentMethod(): void {
         this.paymentMethodsService.update(this.paymentMethod)
             .subscribe(() => {
-                alert('Forma de pagamento atualizada com sucesso!');
+                this.swalService.showToast('Forma de pagamento atualizada com sucesso!', 'success');
                 this.router.navigateByUrl('/payment-methods');
             });
     }
