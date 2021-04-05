@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'payment-methods',
     loadChildren: './payment-methods/payment-methods.module#PaymentMethodsModule'
+  },
+  {
+    path: 'customers',
+    loadChildren: './customers/customers.module#CustomersModule'
   }
 ];
 

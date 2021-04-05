@@ -23,6 +23,11 @@ export class PlansService {
         return this.http.get<Plan>(url);
     }
 
+    public getAll(): Observable<Plan[]> {
+        const url = `${this.endpointsService.apiUrl}/plans/all`;
+        return this.http.get<Plan[]>(url);
+    }
+
     public create(plan: Plan): Observable<OperationResult> {
         const url = `${this.endpointsService.apiUrl}/plans`;
         return this.http.post<OperationResult>(url, plan)
