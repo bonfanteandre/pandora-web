@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-12 mt-2">
+        <h1>Pedidos</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mt-2">
+        <button type="button" class="btn btn-primary" (click)="createOrder()">
+            <i class="fa fa-plus"></i>
+            Novo pedido
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mt-2">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th lass="text-center" style="width: 30%">Total</th>
+                    <th class="text-center" style="width: 30%">Criação</th>
+                    <th lass="text-center" style="width: 30%">Entrega</th>
+                    <th class="text-center" style="width: 30%">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders">
+                    <td>{{ order.customer.name }}</td>
+                    <td>{{ order.total }}</td>
+                    <td>{{ order.createdAt }}</td>
+                    <td>{{ order.deliverAt }}</td>
+                    <td class="text-center" style="width: 30%">
+                        <button type="button" class="btn btn-success mr-2" (click)="editOrder(order)">
+                            <i class="fa fa-edit"></i>
+                            Editar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

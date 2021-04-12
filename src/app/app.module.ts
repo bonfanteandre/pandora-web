@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { CustomersModule } from './customers/customers.module';
+import { OrdersModule } from './orders/orders.module';
 import { PaymentMethodsModule } from './payment-methods/payment-methods.module';
 import { PlansModule } from './plans/plans.module';
 import { ProductsModule } from './products/products.module';
@@ -20,7 +21,8 @@ import { ProductsModule } from './products/products.module';
     PlansModule,
     PaymentMethodsModule,
     CustomersModule,
-    ProductsModule
+    ProductsModule,
+    OrdersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
