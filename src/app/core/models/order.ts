@@ -1,3 +1,4 @@
+import { Address } from "./address";
 import { Customer } from "./customer";
 import { OrderItem } from "./order-item";
 import { OrderStatus } from "./order-status";
@@ -9,6 +10,8 @@ export class Order {
     public createdOn: Date;
     public customerId: string;
     public customer: Customer;
+    public addressId: string;
+    public address: Address;
     public paymentMethodId: string;
     public paymentMethod: PaymentMethod;
     public deliverAt: Date;
