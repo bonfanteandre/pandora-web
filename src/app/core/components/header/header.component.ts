@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
             new HeaderItem('Planos', '/plans', 'fa fa-file'),
             new HeaderItem('Formas de pagamento', '/payment-methods', 'fa fa-credit-card'),
             new HeaderItem('Clientes', '/customers', 'fa fa-users'),
+            new HeaderItem('Produtos', '/products', 'fa fa-archive'),
         ];
     }
 
