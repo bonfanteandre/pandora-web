@@ -1,4 +1,5 @@
 export class Address {
+    public id: string;
     public customerId: string;
     public street: string;
     public number;

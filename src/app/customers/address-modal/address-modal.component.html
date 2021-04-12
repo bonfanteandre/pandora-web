@@ -1,0 +1,54 @@
+<div class="modal-content" #modal>
+    <div class="modal-header">
+        <h2>Endereço</h2>
+        <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row mt-2" *ngIf="operationResult && !operationResult.success">
+            <div class="col-12">
+                <pndr-errors [errors]="operationResult.errors"  [title]="'Erro ao salvar endereço!'">
+                </pndr-errors>
+            </div>
+        </div>
+        <div class="row mt-2" *ngIf="address">
+            <div class="col-12">
+                <form [formGroup]="form" (ngSubmit)="saveAddress()">
+                    <div class="form-group">
+                        <label><strong>Rua *</strong></label>
+                        <input type="text" formControlName="street" class="form-control" placeholder="Nome">
+                        <small *ngIf="form.get('street').errors?.required && (form.get('street').dirty || form.get('street').touched)" class="ng-invalid">
+                            O campo rua é obrigatório.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Número *</strong></label>
+                        <input type="text" formControlName="number" class="form-control" placeholder="Telefone">
+                        <small *ngIf="form.get('number').errors?.required && (form.get('number').dirty || form.get('number').touched)" class="ng-invalid">
+                            O campo número é obrigatório.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Bairro *</strong></label>
+                        <input type="text" formControlName="neighborhood" class="form-control" placeholder="Telefone">
+                        <small *ngIf="form.get('neighborhood').errors?.required && (form.get('neighborhood').dirty || form.get('neighborhood').touched)" class="ng-invalid">
+                            O campo bairro é obrigatório.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Referência *</strong></label>
+                        <input type="text" formControlName="reference" class="form-control" placeholder="Telefone">
+                        <small *ngIf="form.get('reference').errors?.required && (form.get('reference').dirty || form.get('reference').touched)" class="ng-invalid">
+                            O campo referência é obrigatório.
+                        </small>
+                    </div>
+                    <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+                        <i class="fa fa-check"></i>
+                        Salvar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

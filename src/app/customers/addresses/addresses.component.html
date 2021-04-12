@@ -1,0 +1,26 @@
+<div class="row mt-2">
+    <div class="col-12">
+        <h4>Endereços</h4>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        <button class="btn btn-primary" (click)="newAddress()">
+            <i class="fa fa-plus"></i>
+            Adicionar endereço
+        </button>
+    </div>
+</div>
+<div *ngIf="customer">
+    <div class="row mt-2 mb-2" *ngIf="customer.addresses && customer.addresses.length">
+        <div *ngFor="let address of customer.addresses" class="col-3 mr-3">
+            <pndr-address-card [address]="address" (onEditAddress)="onEditAddress(address)" (onRemoveAddress)="onRemoveAddress(address)">
+            </pndr-address-card>
+        </div>
+    </div>
+    <div class="row mt-2 mb-2" *ngIf="!customer.addresses || !customer.addresses.length">
+        <div class="col-12">
+            <p>Nenhum endereço cadastrado.</p>
+        </div>
+    </div>
+</div>
