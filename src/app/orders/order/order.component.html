@@ -1,0 +1,50 @@
+<div class="row mt-2">
+    <div class="col-12">
+        <h1>Cadastro de pedido</h1>
+    </div>
+</div>
+<div class="row mt-2" *ngIf="operationResult && !operationResult.success">
+    <div class="col-12">
+        <pndr-errors [errors]="operationResult.errors"  [title]="'Erro ao salvar cliente!'">
+        </pndr-errors>
+    </div>
+</div>
+<div class="row mt-2" *ngIf="order">
+    <div class="col-12">
+        <form [formGroup]="form" (ngSubmit)="saveOrder()">
+            <div class="form-group">
+                <label><strong>Cliente *</strong></label>
+                <select class="form-control" formControlName="customerId" (change)="selectCustomer($event.target.value)">
+                    <option *ngFor="let customer of customers" [value]="customer.id" [disabled]="customer.id == null">{{ customer.name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><strong>Endereço *</strong></label>
+                <select class="form-control" formControlName="addressId">
+                    <option *ngFor="let address of addresses" [value]="address.id" [disabled]="address.id == null">
+                        {{ address.street }} - {{ address.number }}, {{ address.neighborhood }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><strong>Forma de pagamento *</strong></label>
+                <select class="form-control" formControlName="paymentMethodId">
+                    <option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod.id" [disabled]="paymentMethod.id == null">{{ paymentMethod.name }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><strong>Entrega *</strong></label>
+                <input class="form-control" type="datetime-local" formControlName="deliverAt">
+            </div>
+            <div class="form-group">
+                <label><strong>Observações</strong></label>
+                <textarea class="form-control" rows="3" formControlName="observations">
+                </textarea>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+                <i class="fa fa-check"></i>
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>

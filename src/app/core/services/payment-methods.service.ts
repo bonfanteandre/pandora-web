@@ -17,6 +17,11 @@ export class PaymentMethodsService {
         return this.http.get<PaymentMethod[]>(url);
     }
 
+    public getAll(): Observable<PaymentMethod[]> {
+        const url = `${this.endpointsService.apiUrl}/payment-methods/all`;
+        return this.http.get<PaymentMethod[]>(url);
+    }
+
     public getById(id: string): Observable<PaymentMethod> {
         const url = `${this.endpointsService.apiUrl}/payment-methods/${id}`;
         return this.http.get<PaymentMethod>(url);

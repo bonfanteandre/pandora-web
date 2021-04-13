@@ -13,6 +13,11 @@ export class CustomersService {
 
     constructor (private http: HttpClient, private endpointsService: EndpointsService) { }
 
+    public getAll(): Observable<Customer[]> {
+        const url = `${this.endpointsService.apiUrl}/customers/all`;
+        return this.http.get<Customer[]>(url);
+    }
+
     public getPaged(skip: number, take: number, name: string = null): Observable<Customer[]> {
         const url = `${this.endpointsService.apiUrl}/customers?skip=${skip}&take=${take}&name=${name}`;
         return this.http.get<Customer[]>(url);
