@@ -114,4 +114,12 @@ export class OrderComponent implements OnInit {
                 this.swalService.showToast('Pedido atualizado com sucesso!', 'success');
             });
     }
+
+    public onAddItem(): void {
+        this.loadOrder(this.order.id);
+    }
+
+    public onRemoveItem(): void {
+        this.loadOrder(this.order.id);
+    }
 }

@@ -9,12 +9,16 @@ import { Product } from "../models/product";
 @Injectable({
     providedIn: 'root'
 })
-export class ProductsService {
-    
+export class ProductsService {    
     constructor (private http: HttpClient, private endpointsService: EndpointsService) { }
 
     public getPaged(skip: number, take: number, name: string = null): Observable<Product[]> {
         const url = `${this.endpointsService.apiUrl}/products?skip=${skip}&take=${take}&name=${name}`;
+        return this.http.get<Product[]>(url);
+    }
+
+    public getAll(): Observable<Product[]> {
+        const url = `${this.endpointsService.apiUrl}/products/all`;
         return this.http.get<Product[]>(url);
     }
 

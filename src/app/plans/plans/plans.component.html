@@ -17,14 +17,14 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th class="text-center" style="width: 20%">Preço (R$)</th>
+                    <th class="text-center" style="width: 20%">Preço</th>
                     <th class="text-center" style="width: 30%">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let plan of plans">
                     <td>{{ plan.name }}</td>
-                    <td class="text-center" style="width: 20%">{{ plan.price }}</td>
+                    <td class="text-center" style="width: 20%">{{ plan.price | currency }}</td>
                     <td class="text-center" style="width: 30%">
                         <button type="button" class="btn btn-success mr-2" (click)="editPlan(plan)">
                             <i class="fa fa-edit"></i>

@@ -1,0 +1,24 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th class="text-center" style="width: 10%">Unidade</th>
+            <th class="text-center" style="width: 10%">Quantidade</th>
+            <th class="text-center" style="width: 10%">Total</th>
+            <th class="text-center" style="width: 30%">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of order.items">
+            <td>{{ item.product.name }}</td>
+            <td class="text-center" style="width: 10%">{{ item.unitValue | currency }}</td>
+            <td class="text-center" style="width: 10%">{{ item.amount }}</td>
+            <td class="text-center" style="width: 10%">{{ item.price | currency }}</td>
+            <td class="text-center" style="width: 30%">
+                <button type="button" class="btn btn-danger mr-2" (click)="removeItem(item)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

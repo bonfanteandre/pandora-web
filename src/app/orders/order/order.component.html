@@ -48,3 +48,22 @@
         </form>
     </div>
 </div>
+<div class="row" *ngIf="order && !isNew">
+    <div class="col-12">
+        <hr>
+        <h4>Itens</h4>
+    </div>
+</div>
+<div class="row" *ngIf="order && !isNew">
+    <div class="col-6">
+        <pndr-order-item-form [(order)]="order" (onAddItem)="onAddItem()">
+        </pndr-order-item-form>
+    </div>
+</div>
+<br>
+<div class="row" *ngIf="order && !isNew">
+    <div class="col-12">
+        <pndr-order-items-table [(order)]="order" (onRemoveItem)="onRemoveItem()">
+        </pndr-order-items-table>
+    </div>
+</div>

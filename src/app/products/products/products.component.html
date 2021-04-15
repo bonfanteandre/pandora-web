@@ -18,7 +18,7 @@
                 <tr>
                     <th>Nome</th>
                     <th class="text-center" style="width: 15%">Estoque</th>
-                    <th class="text-center" style="width: 15%">Custo (R$)</th>
+                    <th class="text-center" style="width: 15%">Custo</th>
                     <th style="width: 15%"></th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
                 <tr *ngFor="let product of products">
                     <td>{{ product.name }}</td>
                     <td class="text-center" style="width: 15%">{{ product.stock }}</td>
-                    <td class="text-center" style="width: 15%">{{ product.cost }}</td>
+                    <td class="text-center" style="width: 15%">{{ product.cost | currency }}</td>
                     <td class="text-center" style="width: 30%">
                         <button type="button" class="btn btn-success mr-2" (click)="editProduct(product)">
                             <i class="fa fa-edit"></i>
