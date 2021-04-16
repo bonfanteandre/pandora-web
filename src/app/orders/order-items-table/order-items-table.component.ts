@@ -18,12 +18,34 @@ export class OrdereItemsTableComponent {
         private orderItemsServices: OrderItemsService) { }
 
     public removeItem(item: OrderItem): void {
-        this.orderItemsServices
+        this.swalService.showConfirm('Tem certeza que deseja remover o item?', '', () => {
+            this.orderItemsServices
             .remove(item)
             .subscribe(() => {
                 this.onRemoveItem.emit();
                 this.swalService.showToast('Item removido com sucesso!', 'success');
             })
+        }, null); 
+    }
+
+    public decrementItemAmount(item: OrderItem): void {
+        if ((item.amount - 1) <= 0) {
+            return;
+        }
+
+        item.amount -= 1;
+        item.price = item.amount * item.unitValue;
+        this.orderItemsServices
+            .update(item)
+            .subscribe(() => {});
+    }
+
+    public incrementItemAmount(item: OrderItem): void {
+        item.amount += 1;
+        item.price = item.amount * item.unitValue;
+        this.orderItemsServices
+            .update(item)
+            .subscribe(() => {});
     }
 
 }

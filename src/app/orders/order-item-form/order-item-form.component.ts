@@ -47,23 +47,32 @@ export class OrderItemFormComponent implements OnInit {
 
     public createItem(): void {
         const productId = this.form.get('productId').value;
+        const product = this.products.find(p => p.id == productId);
+        
+        const amount = parseInt(this.form.get('amount').value);
 
         if (this.itemAlreadyAdded(productId)) {
             this.swalService.showMessage('Produto já adicionado!');
             return;
         }
 
-        const product = this.products.find(p => p.id);
-        const amount = parseInt(this.form.get('amount').value);
+        if (amount <= 0) {
+            this.swalService.showMessage('A quantidade deve ser maior que zero!');
+            return;
+        }
         
+        const item = this.createOrderItem(product, amount);
+        this.saveItem(item);
+    }
+
+    private createOrderItem(product: Product, amount: number) {
         const item = new OrderItem();
         item.orderId = this.order.id;
-        item.productId = productId;
+        item.productId = product.id;
         item.amount = amount;
         item.unitValue = product.cost;
         item.price = item.amount * item.unitValue;
-        
-        this.saveItem(item);
+        return item;
     }
 
     private itemAlreadyAdded(productId: string): boolean {
