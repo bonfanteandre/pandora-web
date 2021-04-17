@@ -17,8 +17,8 @@
             <thead>
                 <tr>
                     <th>Cliente</th>
+                    <th>Status</th>
                     <th class="text-center" style="width: 10%">Total</th>
-                    <th class="text-center" style="width: 18%">Criação</th>
                     <th class="text-center" style="width: 18%">Entrega</th>
                     <th class="text-center" style="width: 30%">Ações</th>
                 </tr>
@@ -26,8 +26,12 @@
             <tbody>
                 <tr *ngFor="let order of orders">
                     <td>{{ order.customer.name }}</td>
+                    <td>
+                        <span class="badge badge-{{ order.getStatusBadgeClass() }}">
+                            {{ order.statusDescription }}
+                        </span>
+                    </td>
                     <td class="text-center" style="width: 10%">{{ order.total | currency }}</td>
-                    <td class="text-center" style="width: 18%">{{ order.createdOn | date:'dd/MM/yy H:mm' }}</td>
                     <td class="text-center" style="width: 18%">{{ order.deliverAt | date:'dd/MM/yy H:mm' }}</td>
                     <td class="text-center" style="width: 30%">
                         <button type="button" class="btn btn-success mr-2" (click)="editOrder(order)">

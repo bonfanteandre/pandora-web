@@ -15,7 +15,7 @@ export class OrdersService {
 
     public getPaged(skip: number, take: number, name: string = null): Observable<Order[]> {
         const url = `${this.endpointsService.apiUrl}/orders?skip=${skip}&take=${take}&name=${name}`;
-        return this.http.get<Order[]>(url);
+        return this.http.get<Order[]>(url).pipe(map(os => os.map(o => new Order(o))));
     }
 
     public getById(id: string): Observable<Order> {

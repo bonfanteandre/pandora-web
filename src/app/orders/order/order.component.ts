@@ -118,4 +118,22 @@ export class OrderComponent implements OnInit {
     public onItemsChange(): void {
         this.loadOrder(this.order.id);
     }
+
+    public finish(): void {
+        this.ordersService
+            .finish(this.order)
+            .subscribe(() => this.onItemsChange());
+    }
+
+    public deliver(): void {
+        this.ordersService
+            .deliver(this.order)
+            .subscribe(() => this.onItemsChange());
+    }
+
+    public cancel(): void {
+        this.ordersService
+            .cancel(this.order)
+            .subscribe(() => this.onItemsChange());
+    }
 }

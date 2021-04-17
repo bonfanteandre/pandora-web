@@ -1,12 +1,33 @@
 <div class="row mt-2">
     <div class="col-12">
         <h1>Cadastro de pedido</h1>
+        <hr>
     </div>
 </div>
 <div class="row mt-2" *ngIf="operationResult && !operationResult.success">
     <div class="col-12">
         <pndr-errors [errors]="operationResult.errors"  [title]="'Erro ao salvar cliente!'">
         </pndr-errors>
+    </div>
+</div>
+<div class="row" *ngIf="order && !isNew">
+    <div class="col-12">
+        <h6>Status: {{ order.statusDescription }}</h6>
+    </div>
+    <div class="col-12">
+        <button type="button" class="btn btn-primary mr-2" *ngIf="order.canFinish()" (click)="finish()">
+            <i class="fa fa-check-circle"></i>
+            Finalizar
+        </button>
+        <button type="button" class="btn btn-info mr-2" *ngIf="order.canDeliver()" (click)="deliver()">
+            <i class="fa fa-truck"></i>
+            Entregar
+        </button>
+        <button type="button" class="btn btn-danger mr-2" *ngIf="order.canCancel()" (click)="cancel()">
+            <i class="fa fa-ban"></i>
+            Cancelar
+        </button>
+        <hr>
     </div>
 </div>
 <div class="row mt-2" *ngIf="order">
@@ -41,7 +62,7 @@
                 <textarea class="form-control" rows="3" formControlName="observations">
                 </textarea>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="!form.valid">
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid || !order.canChange()">
                 <i class="fa fa-check"></i>
                 Salvar
             </button>

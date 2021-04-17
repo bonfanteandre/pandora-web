@@ -12,14 +12,14 @@
         <tr *ngFor="let item of order.items">
             <td>{{ item.product.name }}</td>
             <td class="text-center" style="width: 15%">
-                <button class="btn btn-light" (click)="decrementItemAmount(item)">-</button>
+                <button class="btn btn-light" (click)="decrementItemAmount(item)" [disabled]="!order.canChangeItems()">-</button>
                 <span style="margin-left: 10px; margin-right: 10px;">{{ item.amount }}</span>
-                <button class="btn btn-light" (click)="incrementItemAmount(item)">+</button>
+                <button class="btn btn-light" (click)="incrementItemAmount(item)" [disabled]="!order.canChangeItems()">+</button>
             </td>
             <td class="text-center" style="width: 10%">{{ item.unitValue | currency }}</td>
             <td class="text-center" style="width: 10%">{{ item.price | currency }}</td>
             <td class="text-center" style="width: 30%">
-                <button type="button" class="btn btn-danger mr-2" (click)="removeItem(item)">
+                <button type="button" class="btn btn-danger mr-2" (click)="removeItem(item)" [disabled]="!order.canChangeItems()">
                     <i class="fa fa-trash"></i>
                 </button>
             </td>
