@@ -10,7 +10,7 @@ import { SwalService } from "src/app/shared/services/swal.service";
 })
 export class OrdereItemsTableComponent {
 
-    @Output() public onRemoveItem = new EventEmitter<void>();
+    @Output() public onItemsChange = new EventEmitter<void>();
     @Input() public order: Order;
 
     constructor(
@@ -22,7 +22,7 @@ export class OrdereItemsTableComponent {
             this.orderItemsServices
             .remove(item)
             .subscribe(() => {
-                this.onRemoveItem.emit();
+                this.onItemsChange.emit();
                 this.swalService.showToast('Item removido com sucesso!', 'success');
             })
         }, null); 
@@ -33,7 +33,7 @@ export class OrdereItemsTableComponent {
             item.decrementAmount();
             this.orderItemsServices
                 .update(item)
-                .subscribe(() => {});
+                .subscribe(() => this.onItemsChange.emit());
         }
     }
 
@@ -41,7 +41,7 @@ export class OrdereItemsTableComponent {
         item.incrementAmount();
         this.orderItemsServices
             .update(item)
-            .subscribe(() => {});
+            .subscribe(() => this.onItemsChange.emit());
     }
 
 }

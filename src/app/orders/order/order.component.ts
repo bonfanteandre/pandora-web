@@ -115,11 +115,7 @@ export class OrderComponent implements OnInit {
             });
     }
 
-    public onAddItem(): void {
-        this.loadOrder(this.order.id);
-    }
-
-    public onRemoveItem(): void {
+    public onItemsChange(): void {
         this.loadOrder(this.order.id);
     }
 }

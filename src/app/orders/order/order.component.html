@@ -52,18 +52,28 @@
     <div class="col-12">
         <hr>
         <h4>Itens</h4>
+        <hr>
     </div>
 </div>
 <div class="row" *ngIf="order && !isNew">
-    <div class="col-6">
-        <pndr-order-item-form [(order)]="order" (onAddItem)="onAddItem()">
+    <div class="col-12">
+        <h5>Total: {{ order.total | currency }}</h5>
+        <hr>
+    </div>
+</div>
+<div class="row" *ngIf="order && !isNew">
+    <div class="col-12">
+        <h6>Novo item</h6>
+    </div>
+    <div class="col-12">
+        <pndr-order-item-form [(order)]="order" (onAddItem)="onItemsChange()">
         </pndr-order-item-form>
     </div>
 </div>
 <br>
 <div class="row" *ngIf="order && !isNew">
     <div class="col-12">
-        <pndr-order-items-table [(order)]="order" (onRemoveItem)="onRemoveItem()">
+        <pndr-order-items-table [(order)]="order" (onItemsChange)="onItemsChange()">
         </pndr-order-items-table>
     </div>
 </div>
