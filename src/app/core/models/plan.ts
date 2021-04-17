@@ -5,7 +5,9 @@ export class Plan {
 
     constructor(init?: Partial<Plan>) {
         if (init) {
-            Object.assign(this, init);
+            this.id = init.id;
+            this.name = init.name;
+            this.price = init.price;
         }
     }
 }

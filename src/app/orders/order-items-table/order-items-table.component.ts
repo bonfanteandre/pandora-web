@@ -29,20 +29,16 @@ export class OrdereItemsTableComponent {
     }
 
     public decrementItemAmount(item: OrderItem): void {
-        if ((item.amount - 1) <= 0) {
-            return;
+        if (item.canDecrementAmount()) {
+            item.decrementAmount();
+            this.orderItemsServices
+                .update(item)
+                .subscribe(() => {});
         }
-
-        item.amount -= 1;
-        item.price = item.amount * item.unitValue;
-        this.orderItemsServices
-            .update(item)
-            .subscribe(() => {});
     }
 
     public incrementItemAmount(item: OrderItem): void {
-        item.amount += 1;
-        item.price = item.amount * item.unitValue;
+        item.incrementAmount();
         this.orderItemsServices
             .update(item)
             .subscribe(() => {});

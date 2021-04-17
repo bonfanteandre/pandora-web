@@ -18,4 +18,22 @@ export class Order {
     public observations: string;
     public items: OrderItem[] = [];
     public total: number;
+
+    constructor(init?: Partial<Order>) {
+        if (init) {
+            this.id = init.id;
+            this.status = init.status;
+            this.createdOn = init.createdOn;
+            this.customerId = init.customerId;
+            this.customer = new Customer(init.customer);
+            this.addressId = init.addressId;
+            this.address = new Address(init.address);
+            this.paymentMethodId = init.paymentMethodId;
+            this.paymentMethod = new PaymentMethod(this.paymentMethod);
+            this.deliverAt = init.deliverAt;
+            this.observations = init.observations;
+            this.items = init.items ? init.items.map(i => new OrderItem(i)) : [];
+            this.total = init.total;
+        }
+    }
 }

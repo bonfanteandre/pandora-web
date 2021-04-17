@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import { EndpointsService } from "src/app/shared/services/endpoints.service";
 import { OperationResult } from "../models/common/operation-result";
 import { Order } from "../models/order";
@@ -20,7 +20,7 @@ export class OrdersService {
 
     public getById(id: string): Observable<Order> {
         const url = `${this.endpointsService.apiUrl}/orders/${id}`;
-        return this.http.get<Order>(url);
+        return this.http.get<Order>(url).pipe(map(o => new Order(o)));
     }
 
     public create(order: Order): Observable<OperationResult> {
