@@ -79,6 +79,7 @@
 <div class="row" *ngIf="order && !isNew">
     <div class="col-12">
         <h5>Total: {{ order.total | currency }}</h5>
+        <h5>Lucro: {{ order.getProfit() | currency }}</h5>
         <hr>
     </div>
 </div>

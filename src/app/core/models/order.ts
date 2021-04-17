@@ -73,4 +73,16 @@ export class Order {
             default: return 'light';
         }
     }
+
+    public getProfit(): number {
+        if (!this.items || !this.items.length) {
+            return 0;
+        }
+
+        const totalPrice = this.items
+            .map(i => i.price)
+            .reduce((price, totalPrice) => totalPrice += price);
+
+        return (totalPrice / 100) * 30;
+    }
 }
